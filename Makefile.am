@@ -302,6 +302,12 @@ src_libdrivers_la_SOURCES += \
 	src/hardware/dreamsourcelab-dslogic/protocol.c \
 	src/hardware/dreamsourcelab-dslogic/api.c
 endif
+if HW_EEZ_PSU
+src_libdrivers_la_SOURCES += \
+	src/hardware/eez-psu/protocol.h \
+	src/hardware/eez-psu/protocol.c \
+	src/hardware/eez-psu/api.c
+endif
 if HW_FLUKE_45
 src_libdrivers_la_SOURCES += \
 	src/hardware/fluke-45/protocol.h \
