@@ -324,6 +324,8 @@ static struct sr_dev_inst *probe_device(struct sr_scpi_dev_inst *scpi)
 	const struct rigol_ds_model *model = NULL;
 	gchar *channel_name, **version;
 
+	sr_info("rigol-ds probing");
+
 	if (sr_scpi_get_hw_id(scpi, &hw_info) != SR_OK) {
 		sr_info("Couldn't get IDN response, retrying.");
 		sr_scpi_close(scpi);
@@ -1021,11 +1023,11 @@ static int dev_acquisition_start(const struct sr_dev_inst *sdi)
 	devc->channel_entry = devc->enabled_channels;
 
 	if (devc->data_source == DATA_SOURCE_LIVE)
-		devc->sample_rate = analog_frame_size(sdi) / 
+		devc->sample_rate = analog_frame_size(sdi) /
 			(devc->timebase * devc->model->series->num_horizontal_divs);
 	else {
 		float xinc;
-		if (devc->model->series->protocol >= PROTOCOL_V3 && 
+		if (devc->model->series->protocol >= PROTOCOL_V3 &&
 				sr_scpi_get_float(sdi->conn, "WAV:XINC?", &xinc) != SR_OK) {
 			sr_err("Couldn't get sampling rate");
 			return SR_ERR;

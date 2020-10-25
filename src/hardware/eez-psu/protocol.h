@@ -28,6 +28,7 @@
 #define LOG_PREFIX "eez-psu"
 
 struct dev_context {
+	int channels;
 };
 
 SR_PRIV int eez_psu_receive_data(int fd, int revents, void *cb_data);
